@@ -14,7 +14,7 @@ const Home = () => {
     <Header />
     <div style={divStyle}>
           <h1 color="white">British English Certification(BEC) Enquiry Management System </h1>
-          <h2 color="white">Domain : Education</h2>
+          <h2 color="white">Domain : Education system</h2>
     </div>
     </div>
     
