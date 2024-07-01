@@ -1,31 +1,50 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Header from "./header";
 
 const Login = ({ registeredUsers }) => {
    const navigate = useNavigate();
+ 
    const [formData, setFormData] = useState({
       email: "",
       password: ""
    });
    const [error, setError] = useState("");
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
-      const user = registeredUsers.get(formData.email);
 
-      if (!user) {
-         setError("User not found. Please Register");
-         return;
+      try {
+         const response = await fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+         });
+
+         if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || "Login failed");
+         }
+
+         const user = await response.json();
+
+         if (
+            user.email.toLowerCase() === "admin@gmail.com" &&
+            formData.password === "abc"
+         ) {
+          
+            alert(`Login successful! Welcome Admin`);
+            navigate("/adminHeader");
+         } else {
+            alert(`Login successful! Welcome, ${user.name}`);
+            navigate("/");
+         }
+      } catch (error) {
+         setError(error.message || "Something went wrong");
       }
-
-      
-     if(user.password !== formData.password){
-      alert("Invalid password. Please try again.")
-     return;
-   }
-      alert(`Login Successful! Welcome, ${user.username}`)
-      navigate("/");
    };
 
    const handleChange = (e) => {
@@ -71,7 +90,10 @@ const Login = ({ registeredUsers }) => {
                               />
                            </div>
                            {error && <div className="alert alert-danger">{error}</div>}
-                           <button type="submit" className="btn btn-primary btn-block">
+                           <button
+                              type="submit"
+                              className="btn btn-primary btn-block"
+                           >
                               Login
                            </button>
                         </form>

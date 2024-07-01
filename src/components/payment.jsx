@@ -10,7 +10,7 @@ const Payment = () => {
 
     const handlePayNow = () => {
 
-        alert(`Proceeding to pay for ${course.title}`);
+        alert(`Proceeding to pay for ${course.course_name}`);
         navigate('/');
     };
 
@@ -19,8 +19,8 @@ const Payment = () => {
             {course ? (
                 <Card className="text-center">
                     <Card.Body>
-                        <Card.Title>{course.title}</Card.Title>
-                        <Card.Text>{course.description}</Card.Text>
+                        <Card.Title>{course.course_name}</Card.Title>
+                        <Card.Text>{course.course_description}</Card.Text>
                         <Button variant="success" onClick={handlePayNow}>Pay Now</Button>
                     </Card.Body>
                 </Card>

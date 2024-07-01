@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./header";
 
-const RegistrationPage = ({ onRegister }) => {
+const RegistrationPage = ({  }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
@@ -12,7 +12,7 @@ const RegistrationPage = ({ onRegister }) => {
         confirmPassword: ""
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
 
@@ -21,13 +21,31 @@ const RegistrationPage = ({ onRegister }) => {
             return;
         }
 
-        alert(`Registration successful!\nUsername: ${formData.username}\nEmail: ${formData.email}`);
+        try{
+            const response = await fetch("http://localhost:8080/student/add",{
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    name: formData.username,
+                    email: formData.email,
+                    password: formData.password
+                })
+            });
+            
 
-        navigate("/login");
-
-        if (onRegister) {
-            onRegister(formData);
+            if(response.ok){
+                alert("Registration successfull");
+                navigate("/login");
+            }else{
+                alert("Failed to register. Please try again.");
+            }
+        }catch(error){
+            console.error("Error registering",error);
+            alert("An error occurred. Please try again later. ")
         }
+
 
         setFormData({
             username: "",
