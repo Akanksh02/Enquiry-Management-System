@@ -33,8 +33,9 @@ const ViewCourse = () => {
             setError("Error deleting course. Please try again later.");
         }
     };
-    
-    const handleUpdateCourse = (course_id) => {
+
+    const handleUpdateCourse =  (course_id) => {
+        console.log('course_id from AdminViewCrs.', course_id);
         navigate(`/updateCourse/${course_id}`);
     };
 

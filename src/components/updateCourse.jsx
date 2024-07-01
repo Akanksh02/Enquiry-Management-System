@@ -8,6 +8,8 @@ const UpdateCourse = () => {
     const navigate = useNavigate();
     const { course_id } = useParams();
 
+
+    console.log('course_id from updateCrsJSX : ',course_id);
     const [courseData, setCourseData] = useState({
         course_name: '',
         course_description: '',
@@ -17,23 +19,21 @@ const UpdateCourse = () => {
 
     const [error, setError] = useState('');
 
-   
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCourseData({
-            ...courseData,
-            [name]: value,
-        });
+        setCourseData({ ...courseData, [name]: value, });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // console.log('coursedata: ', courseData);
         try {
             const response = await axios.put(`http://localhost:8080/courses/update/${course_id}`, courseData);
             console.log("Course updated.", response.data);
-            navigate("/adminViewCourse"); 
+            navigate("/adminViewCourse");
         } catch (error) {
             console.error("Error updating course:", error);
             setError('Error updating course. Please try again.');
@@ -79,7 +79,7 @@ const UpdateCourse = () => {
                                 <td>Cost</td>
                                 <td>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="cost"
                                         className="form-control"
                                         value={courseData.cost}
@@ -92,7 +92,7 @@ const UpdateCourse = () => {
                                 <td>Duration</td>
                                 <td>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="duration"
                                         className="form-control"
                                         value={courseData.duration}

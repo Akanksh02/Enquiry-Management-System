@@ -5,12 +5,14 @@ import Header from "./header";
 
 const Login = ({ registeredUsers }) => {
    const navigate = useNavigate();
- 
+
    const [formData, setFormData] = useState({
       email: "",
       password: ""
    });
+
    const [error, setError] = useState("");
+
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -23,6 +25,7 @@ const Login = ({ registeredUsers }) => {
             },
             body: JSON.stringify(formData)
          });
+         // console.log(response);
 
          if (!response.ok) {
             const errorMessage = await response.text();
@@ -35,9 +38,9 @@ const Login = ({ registeredUsers }) => {
             user.email.toLowerCase() === "admin@gmail.com" &&
             formData.password === "abc"
          ) {
-          
-            alert(`Login successful! Welcome Admin`);
-            navigate("/adminHeader");
+
+            alert(`Login successful! Welcome, Admin `);
+            navigate("/adminHeader/");
          } else {
             alert(`Login successful! Welcome, ${user.name}`);
             navigate("/");
@@ -48,6 +51,7 @@ const Login = ({ registeredUsers }) => {
    };
 
    const handleChange = (e) => {
+
       const { name, value } = e.target;
       setFormData({
          ...formData,

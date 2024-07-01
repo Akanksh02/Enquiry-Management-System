@@ -25,44 +25,45 @@ const App = () => {
   const [registeredUsers, setRegisteredUsers] = useState(new Map());
 
   const handleRegister = (userData) => {
-    
+
     registeredUsers.set(userData.email, userData);
-    setRegisteredUsers(new Map(registeredUsers)); 
+    setRegisteredUsers(new Map(registeredUsers));
   };
   return (
-  <AuthProvider>
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route
-            path="/register"
-            element={<RegistrationPage onRegister={handleRegister} />}
-          />
-          <Route
-            path="/login"
-            element={<Login registeredUsers={registeredUsers} />}
-          />
-          <Route path="/" element={<Home />} />
-          
-          <Route path="/enquiry" element={<Enquiry />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/header" element={<Header />} />
-          <Route path="/viewCourses" element={<CoursesPage />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/adminViewCourse" element={<ViewCourse />} />
-          <Route path="/adminHeader" element={<AdminHeader />} />
-          <Route path="/adminEnquiry" element={<AdminEnquiry />} />
-          <Route path="/Users" element={<UserManagement />} />
-          <Route path="/AddNewCourse" element={<AddNewCourse />} />
-          <Route path="/adminHome" element={<AdminHome />} />
-          <Route path="/updateCourse/:id" component={UpdateCourse} />
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route
+              path="/register"
+              element={<RegistrationPage onRegister={handleRegister} />}
+            />
+            <Route
+              path="/login"
+              element={<Login registeredUsers={registeredUsers} />}
+            />
+            <Route path="/" element={<Home />} />
 
-        </Routes>
-      </div>
+            <Route path="/enquiry" element={<Enquiry />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/header" element={<Header />} />
+            <Route path="/viewCourses" element={<CoursesPage />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/adminViewCourse" element={<ViewCourse />} />
+            <Route path="/adminHeader" element={<AdminHeader />} />
+            <Route path="/adminEnquiry" element={<AdminEnquiry />} />
+            <Route path="/Users" element={<UserManagement />} />
+            <Route path="/AddNewCourse" element={<AddNewCourse />} />
+            <Route path="/adminHome" element={<AdminHome />} />
+            <Route path="/updateCourse/:course_id" element={<UpdateCourse />} />
+            
 
-    </Router>
+          </Routes>
+        </div>
+
+      </Router>
     </AuthProvider>
-  
+
   );
 }
 
