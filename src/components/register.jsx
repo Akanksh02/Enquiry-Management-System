@@ -8,6 +8,7 @@ const RegistrationPage = ({  }) => {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
+        role:"",
         password: "",
         confirmPassword: ""
     });
@@ -30,6 +31,7 @@ const RegistrationPage = ({  }) => {
                 body: JSON.stringify({
                     name: formData.username,
                     email: formData.email,
+                    role:formData.role,
                     password: formData.password
                 })
             });
@@ -50,6 +52,7 @@ const RegistrationPage = ({  }) => {
         setFormData({
             username: "",
             email: "",
+            role:"",
             password: "",
             confirmPassword: ""
         });
@@ -95,6 +98,22 @@ const RegistrationPage = ({  }) => {
                                         onChange={handleChange}
                                         required
                                     />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td >
+                                    <select 
+                                    name="role"
+                                    className="form-control"
+                                    value={formData.role}
+                                    onChange={handleChange}
+                                    required
+                                    >
+                                    <option value="">Select Role</option>
+                                    <option value="student">Student</option>
+                                    <option value="admin">Admin</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>

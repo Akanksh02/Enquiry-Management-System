@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
 import Header from './header';
 
 const divStyle = {
@@ -8,11 +9,11 @@ const divStyle = {
 };
 const Logout = () => {
     const navigate = useNavigate();
+    const {logout} = useContext(UserContext);
 
     useEffect(() => {
 
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
+        logout();
 
 
         const timer = setTimeout(() => {

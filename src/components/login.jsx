@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Header from "./header";
+import { UserContext } from "./UserContext";
 
-const Login = ({ registeredUsers }) => {
+const Login = () => {
    const navigate = useNavigate();
+   const {login} = useContext(UserContext);
+
 
    const [formData, setFormData] = useState({
       email: "",
@@ -33,14 +36,11 @@ const Login = ({ registeredUsers }) => {
          }
 
          const user = await response.json();
+          login(user);
+         if (user.role.toLowerCase() === "admin") {
 
-         if (
-            user.email.toLowerCase() === "admin@gmail.com" &&
-            formData.password === "abc"
-         ) {
-
-            alert(`Login successful! Welcome, Admin `);
-            navigate("/adminHeader/");
+            alert(`Login successful! Welcome, ${user.name} `);
+            navigate("/adminHeader");
          } else {
             alert(`Login successful! Welcome, ${user.name}`);
             navigate("/");

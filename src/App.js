@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import './App.css';
 import AddNewCourse from './components/AddNewCourse';
-import { AuthProvider } from './components/AuthContext';
+import AdminPaymentList from './components/AdminPaymentList';
+import { UserProvider } from './components/UserContext';
 import UserManagement from './components/Users';
 import AdminEnquiry from './components/adminEnquiry';
 import AdminHeader from './components/adminHeader';
@@ -30,7 +31,7 @@ const App = () => {
     setRegisteredUsers(new Map(registeredUsers));
   };
   return (
-    <AuthProvider>
+    <UserProvider>
       <Router>
         <div className="App">
           <Routes>
@@ -56,13 +57,14 @@ const App = () => {
             <Route path="/AddNewCourse" element={<AddNewCourse />} />
             <Route path="/adminHome" element={<AdminHome />} />
             <Route path="/updateCourse/:course_id" element={<UpdateCourse />} />
+            <Route path="/AdminPaymentList" element={<AdminPaymentList />} />
             
 
           </Routes>
         </div>
 
       </Router>
-    </AuthProvider>
+    </UserProvider>
 
   );
 }

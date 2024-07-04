@@ -26,7 +26,7 @@ const ViewCourse = () => {
     const handleDeleteCourse = async (course_id) => {
         try {
             await axios.delete(`http://localhost:8080/courses/delete/${course_id}`);
-            await fetchCourses(); // Refetch the courses after deletion
+            await fetchCourses(); 
             console.log("Course deleted successfully");
         } catch (error) {
             console.error("Error deleting course:", error);

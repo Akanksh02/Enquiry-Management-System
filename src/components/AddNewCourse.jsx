@@ -1,11 +1,13 @@
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminHeader from "./adminHeader";
 
 
 
 const AddNewCourse = ({ onAddCourse }) => {
+    const navigate = useNavigate();
     const [coursedata, setCourseData] = useState({
         course_name: '',
         course_description: '',
@@ -26,11 +28,14 @@ const AddNewCourse = ({ onAddCourse }) => {
 
         try{
             const response = await axios.post("http://localhost:8080/courses/add",coursedata);
-            console.log("course added.",response.data);
+            alert("Course Added");
             onAddCourse();
+          
+
         }catch(error){
             console.error("Error adding course:",error);
         }
+
 
       
 
@@ -106,7 +111,7 @@ const AddNewCourse = ({ onAddCourse }) => {
                             <tr>
                                 <td></td>
                                 <td>
-                                    <button type="submit" className="btn btn-primary">
+                                    <button type="submit" className="btn btn-primary" >
                                         Add 
                                     </button>
                                 </td>

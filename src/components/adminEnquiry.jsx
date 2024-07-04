@@ -47,7 +47,7 @@ const AdminEnquiry = () => {
                                 <th>Description</th>
                                 <th>Email Address</th>
                                 <th>Enquiry Date</th>
-                                <th>Resolved</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,10 +61,10 @@ const AdminEnquiry = () => {
                                     <td>{enquiry.date}</td>
                                     <td>
                                         <button
-                                            className="btn btn-success"
+                                            className="btn btn-danger"
                                             onClick={() => handleResolveEnquiry(enquiry.id)}
                                         >
-                                            Resolve
+                                            Delete
                                         </button>
                                     </td>
                                 </tr>
